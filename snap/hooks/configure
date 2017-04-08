@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Creating a consul directory to get access to it's unix socket if present"
+mkdir -p $SNAP_COMMON/consul

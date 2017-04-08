@@ -19,9 +19,9 @@ plugs:
   consul-tmp:
     interface: content
     content: consul-tmp
-    # target: $SNAP/consul
-    # target: $SNAP_COMMON/consul
-    target: $SNAP_COMMON
+    target: $SNAP_COMMON/consul
+    # using just $SNAP_COMMON works
+    # target: $SNAP_COMMON
     default-provider: consul-dmitriis:consul-tmp
 
 parts:
