@@ -1,0 +1,38 @@
+name: vault-dmitriis
+version: "0.6.5"
+summary: Vault is a tool for securely accessing secrets.
+description: |
+  A modern system requires access to a multitude of secrets: database
+  credentials, API keys for external services, credentials for service-oriented
+  architecture communication, etc. Understanding who is accessing what secrets
+  is already very difficult and platform-specific. Adding on key rolling,
+  secure storage, and detailed audit logs is almost impossible without a custom
+  solution. This is where Vault steps in.
+confinement: strict
+
+apps:
+  vault:
+    command: vault-snap
+    plugs: [network, network-bind, consul-tmp]
+
+plugs:
+  consul-tmp:
+    interface: content
+    content: consul-tmp
+    # target: $SNAP/consul
+    # target: $SNAP_COMMON/consul
+    target: $SNAP_COMMON
+    default-provider: consul-dmitriis:consul-tmp
+
+parts:
+  vault:
+    source: https://github.com/hashicorp/vault.git
+    source-tag: v0.6.5
+    plugin: go
+    go-importpath: github.com/hashicorp/vault
+    build-packages: [git]
+  script:
+    source: .
+    plugin: dump
+    prime:
+      - vault-snap

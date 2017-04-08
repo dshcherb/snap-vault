@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ $# -gt 0 ]; then
+  commandoption="$1"
+  shift
+fi
+
+if [ "$commandoption" = "--help" ] && [ $# -gt 0 ]; then
+  subcommand="$1"
+  shift
+fi
+
+exec vault $commandoption $subcommand
+
